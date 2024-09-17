@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-const int NO_CUSTOMERS = 4;
+const int NO_CUSTOMERS = 2;
 int total_accounts;
 
 struct BankCustomer{
@@ -31,7 +31,7 @@ int main(){
     for (int i = 0; i < NO_CUSTOMERS; i++){
         inputCustomerInfo (&customers[i]);
     }
-
+    cout << "-------------------------------------------------\n";
     for (int i = 0; i < NO_CUSTOMERS; i++){
         printCustomerInfo (&customers[i]);
     }
@@ -59,19 +59,20 @@ void inputCustomerInfo (BankCustomer *cptr){
         cout << "Enter the balance for account number #" << i+1 <<": ";
         cin >> cptr -> balance[i];
         cout << "\n";
+        
     }
+    cin.ignore();
     numCust++;
 }
 
 void printCustomerInfo (BankCustomer *cptr){
 
-    cout << "Name: " << cptr ->first_name << " " << cptr -> last_name << "\n";
-    cout << "Last 4 Digits of SSN: " << cptr ->social_security_no;
+    cout << "Name : " << cptr ->first_name << " " << cptr -> last_name << "\n";
+    cout << "Last 4 Digits of SSN: " << cptr ->social_security_no << "\n";
     cout << "Accounts and Balance: \n";
     for (int i = 0; i < total_accounts ; i++){
-        cout << "Account No :"<< cptr -> bank_accounts << "\t";
-        cout << "Balance: " << cptr -> balance << "\n";
+        cout << i + 1 <<". Account No :"<< cptr -> bank_accounts[i] << "\t";
+        cout << "Balance: $" << cptr -> balance[i] << "\n";
     }
-
-
+    cout <<"\n";
 }
