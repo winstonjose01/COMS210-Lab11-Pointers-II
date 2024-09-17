@@ -1,4 +1,7 @@
 #include <iostream>
+#include <limits>
+#include <string>
+#include <cctype>
 using namespace std;
 
 const int NO_CUSTOMERS = 2;
@@ -24,6 +27,7 @@ struct BankCustomer{
 // Function declaration
 void inputCustomerInfo (BankCustomer *);
 void printCustomerInfo (BankCustomer *);
+bool validationInputStr (string *);
 
 int main(){
     BankCustomer *customers = new BankCustomer[NO_CUSTOMERS];
@@ -48,7 +52,18 @@ void inputCustomerInfo (BankCustomer *cptr){
     cout << "Last Name: ";
     getline(cin, cptr -> last_name);
     cout << "Last 4 digits of Social Security No: ";
-    cin >> cptr -> social_security_no;
+    while (true){
+        cin >> cptr -> social_security_no;
+        if (cin.fail()){
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "Invalid input\n";
+            cout << "Enter the right value :";
+        }
+    else {
+            break;
+        }
+    }
     cout << "How many account does this customer have: ";
     cin >> total_accounts;
     cptr -> bank_accounts = new int[total_accounts];
@@ -76,3 +91,4 @@ void printCustomerInfo (BankCustomer *cptr){
     }
     cout <<"\n";
 }
+
