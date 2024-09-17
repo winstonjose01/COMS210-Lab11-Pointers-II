@@ -1,12 +1,12 @@
-#include <iostream>>
+#include <iostream>
 using namespace std;
 
 const int NO_CUSTOMERS = 4;
+int total_accounts;
 
 struct BankCustomer{
     string first_name;
     string last_name;
-    int phone;
     int social_security_no;
     int * bank_accounts;
     double * balance;
@@ -25,8 +25,7 @@ struct BankCustomer{
 void inputCustomerInfo (BankCustomer *);
 void printCustomerInfo (BankCustomer *);
 
-main(){
-
+int main(){
     BankCustomer *customers = new BankCustomer[NO_CUSTOMERS];
 
     for (int i = 0; i < NO_CUSTOMERS; i++){
@@ -37,25 +36,42 @@ main(){
         printCustomerInfo (&customers[i]);
     }
 
+    return 0;
 }
 
-void inputCustomerInfo (BankCustomer * custptr){
+void inputCustomerInfo (BankCustomer *cptr){
     static int numCust = 1;
     cout << "Enter the account details for Customer #" << numCust << ": \n";
 
     cout << "First Name: ";
-    getline(cin, custptr->first_name);
+    getline(cin, cptr -> first_name);
     cout << "Last Name: ";
-    getline(cin, custptr->last_name);
-    cout << "Phone No: ";
-    cin >> custptr -> phoe
-    cout 
-
-
+    getline(cin, cptr -> last_name);
+    cout << "Last 4 digits of Social Security No: ";
+    cin >> cptr -> social_security_no;
+    cout << "How many account does this customer have: ";
+    cin >> total_accounts;
+    cptr -> bank_accounts = new int[total_accounts];
+    cptr -> balance = new double[total_accounts];
+    for (int i = 0; i < total_accounts; i++){
+        cout << "\nEnter the account number for #" << i+1 <<": ";
+        cin >> cptr -> bank_accounts[i];
+        cout << "Enter the balance for account number #" << i+1 <<": ";
+        cin >> cptr -> balance[i];
+        cout << "\n";
+    }
+    numCust++;
 }
 
-void printCustomerInfor (BankCustomer *custptr){
+void printCustomerInfo (BankCustomer *cptr){
 
+    cout << "Name: " << cptr ->first_name << " " << cptr -> last_name << "\n";
+    cout << "Last 4 Digits of SSN: " << cptr ->social_security_no;
+    cout << "Accounts and Balance: \n";
+    for (int i = 0; i < total_accounts ; i++){
+        cout << "Account No :"<< cptr -> bank_accounts << "\t";
+        cout << "Balance: " << cptr -> balance << "\n";
+    }
 
 
 }
